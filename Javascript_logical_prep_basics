@@ -1,0 +1,30 @@
+arr = [1,1,2,2,3,4,5,6,6];
+arr1 = [1,2,[3,4],[2,[4,5]]];
+//remove duplicate values from array
+const a  = arr.filter((item, index) => arr.indexOf(item) === index);
+//get count for each duplicate values
+const b =  arr.reduce((acc, curr) => {
+    acc[curr] = (acc[curr] || 0) + 1;
+    return acc;
+},{})
+//recursive for Array to Flattern
+function flattern(arr) {
+  let result = [];
+  function flat(nested) {
+    for (let i = 0; i < nested.length; i++) {
+      const item = nested[i];
+      if (Array.isArray(item)) {
+        flat(item)
+      } else {
+        result.push(item);
+      }
+    }
+  }
+  flat(arr);
+  return result;
+}  
+//get only duplicate values
+console.log(arr.filter((item, index) => index > 0 && item === arr[index -1]));
+console.log(b);
+console.log(a);
+console.log(flattern(arr1))
